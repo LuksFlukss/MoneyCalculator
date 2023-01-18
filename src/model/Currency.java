@@ -26,6 +26,6 @@ public class Currency {
 
     @Override
     public String toString() {
-        return code;
+        return (getName() + " (" + getSymbol() + ")");
     }  
 }

@@ -33,7 +33,7 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog{
     }
 
     private JTextField amount() {
-        JTextField textField = new JTextField("100");
+        JTextField textField = new JTextField("120");
         textField.setColumns(10);
         textField.getDocument().addDocumentListener(amountChanged());
         amount = textField.getText();

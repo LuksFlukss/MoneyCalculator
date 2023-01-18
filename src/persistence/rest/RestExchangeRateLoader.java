@@ -2,10 +2,11 @@ package persistence.rest;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
+import static java.lang.Math.round;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Currency;
@@ -13,11 +14,13 @@ import model.ExchangeRate;
 import persistence.ExchangeRateLoader;
 
 public class RestExchangeRateLoader implements ExchangeRateLoader {
+    
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     @Override
     public ExchangeRate load(Currency from, Currency to) {
-        System.out.println(from);
-        System.out.println(to);
+        System.out.println("From => " + from);
+        System.out.println("To => " + to);
         return new ExchangeRate(from, to, (readRate(read(from.getCode(), to.getCode()))));
     }
 
@@ -41,10 +44,13 @@ public class RestExchangeRateLoader implements ExchangeRateLoader {
         } catch (IOException ex) {
             Logger.getLogger(RestExchangeRateLoader.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println(line);
         return line;
     }
     
    private Double readRate(String line) {
-       return Double.valueOf(line.split(": ")[1]);
+       Double valueOff;
+       valueOff = Double.valueOf(line.split(": ")[1]);
+       return (valueOff);
    }
 }
